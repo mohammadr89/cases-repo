@@ -17,8 +17,8 @@ xsize = 7680
 ysize = 5760
 zsize = 3840
 
-itot = 960
-jtot = 720
+itot = 768
+jtot = 576
 ktot = 384
 
 start_hour = 0
