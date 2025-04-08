@@ -26,7 +26,6 @@ module load netCDF/4.9.2-gompi-2023a
 module load CUDA/12.1.1
 module load Clang/16.0.6-GCCcore-12.3.0
 
-cp plume_chem.ini plume_chem_full.ini
 cp plume_chem1.ini plume_chem.ini
 srun ./microhh init plume_chem
 srun ./microhh run plume_chem
@@ -41,4 +40,6 @@ srun ./microhh run plume_chem
 cp plume_chem6.ini plume_chem.ini
 srun ./microhh run plume_chem
 cp plume_chem7.ini plume_chem.ini
+srun ./microhh run plume_chem
+cp plume_chem8.ini plume_chem.ini
 srun ./microhh run plume_chem
