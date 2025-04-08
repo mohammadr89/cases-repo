@@ -155,7 +155,7 @@ def profile(zi, v_bulk, dv, gamma_v, clip_at_zero=False):
 thl = profile(zi=600, v_bulk=291,   dv=2,     gamma_v=0.006)
 qt  = profile(zi=600, v_bulk=7.5e-3, dv=-0.3e-3, gamma_v=-0.002e-3, clip_at_zero=True)
 
-u = np.ones(ktot) * 3
+u = np.ones(ktot) * 10
 nudgefac = np.ones(ktot) / 10800
 
 # Surface fluxes.
@@ -485,8 +485,8 @@ if (sw_land_surface):
     z0h = np.zeros((jtot, itot), dtype=float_type)
     
     # Set roughness lengths for forest
-    z0m[mask_forest_bool] = 0.75    # Momentum roughness length for forest
-    z0h[mask_forest_bool] = 0.75   # Heat roughness length for forest
+    z0m[mask_forest_bool] = 0.03   # Momentum roughness length for grass
+    z0h[mask_forest_bool] = 0.003 # Heat roughness length for grass
     
     # Set roughness lengths for grass (both in and out regions)
     z0m[~mask_forest_bool] = 0.03   # Momentum roughness length for grass
@@ -520,9 +520,8 @@ if (sw_land_surface):
     z0h.tofile("z0h.0000000")
     
     def set_value(variable, forest, grass):
-        ls[variable][mask_forest_bool] = forest      # Forest values
-        ls[variable][~mask_forest_bool] = forest
-        #ls[variable][~mask_forest_bool] = grass      # Grass values (both in and out)
+        ls[variable][mask_forest_bool] = grass      # Grass values (both in and out)
+        ls[variable][~mask_forest_bool] = grass      # Grass values (both in and out)
 
     # Set surface properties for forest and grass regions
     set_value("c_veg", forest=1.0, grass=1.0)      # Vegetation fraction

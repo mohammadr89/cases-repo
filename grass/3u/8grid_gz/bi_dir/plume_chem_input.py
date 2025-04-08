@@ -485,8 +485,8 @@ if (sw_land_surface):
     z0h = np.zeros((jtot, itot), dtype=float_type)
     
     # Set roughness lengths for forest
-    z0m[mask_forest_bool] = 0.75    # Momentum roughness length for forest
-    z0h[mask_forest_bool] = 0.75   # Heat roughness length for forest
+    z0m[mask_forest_bool] = 0.03   # Momentum roughness length for grass
+    z0h[mask_forest_bool] = 0.003 # Heat roughness length for grass
     
     # Set roughness lengths for grass (both in and out regions)
     z0m[~mask_forest_bool] = 0.03   # Momentum roughness length for grass
@@ -520,15 +520,14 @@ if (sw_land_surface):
     z0h.tofile("z0h.0000000")
     
     def set_value(variable, forest, grass):
-        ls[variable][mask_forest_bool] = forest      # Forest values
-        ls[variable][~mask_forest_bool] = forest
-        #ls[variable][~mask_forest_bool] = grass      # Grass values (both in and out)
+        ls[variable][mask_forest_bool] = grass      # Grass values (both in and out)
+        ls[variable][~mask_forest_bool] = grass      # Grass values (both in and out)
 
     # Set surface properties for forest and grass regions
     set_value("c_veg", forest=1.0, grass=1.0)      # Vegetation fraction
     set_value("lai", forest=4.0, grass=3.1)        # Leaf Area Index
     set_value("water_mask", forest=0, grass=0)     # No water surfaces
-
+    
     ##########################################################
     # Set constant properties for all surfaces
     ##########################################################
