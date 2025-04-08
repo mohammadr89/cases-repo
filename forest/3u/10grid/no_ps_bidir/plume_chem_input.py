@@ -489,8 +489,8 @@ if (sw_land_surface):
     z0h[mask_forest_bool] = 0.75   # Heat roughness length for forest
     
     # Set roughness lengths for grass (both in and out regions)
-    z0m[~mask_forest_bool] = 0.03   # Momentum roughness length for grass
-    z0h[~mask_forest_bool] = 0.003 # Heat roughness length for grass
+    z0m[~mask_forest_bool] = 0.75    # Momentum roughness length for forest
+    z0h[~mask_forest_bool] = 0.75   # Heat roughness length for forest
 
     # Set z0m and z0h in LSM
     ls["z0m"][:,:] = z0m
@@ -522,7 +522,6 @@ if (sw_land_surface):
     def set_value(variable, forest, grass):
         ls[variable][mask_forest_bool] = forest      # Forest values
         ls[variable][~mask_forest_bool] = forest
-        #ls[variable][~mask_forest_bool] = grass      # Grass values (both in and out)
 
     # Set surface properties for forest and grass regions
     set_value("c_veg", forest=1.0, grass=1.0)      # Vegetation fraction
