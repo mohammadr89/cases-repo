@@ -17,9 +17,9 @@ xsize = 7680
 ysize = 5760
 zsize = 3840
 
-itot = 960
-jtot = 720
-ktot = 384
+itot = 384
+jtot = 288
+ktot = 192
 
 start_hour = 0
 end_hour = 24
@@ -112,27 +112,27 @@ else:
     species = {}
 
 
-def stretched_vertical_grid(z_bottom, z_top, n_layers, stretch_factor):
-    # Create a normalized grid in [0, 1]
-    eta = np.linspace(0, 1, n_layers + 1)  # n_layers + 1 points (including top and bottom)
-    stretched_eta = (np.exp(stretch_factor * eta) - 1) / (np.exp(stretch_factor) - 1)
-    zh = z_bottom + (z_top - z_bottom) * stretched_eta
-    z = 0.5 * (zh[:-1] + zh[1:])
-    return z, zh
 
-z_bottom = 0
-z_top = zsize
-n_layers = ktot
-stretch_factor = 1.6  # This gives ~2.5m near surface, ~20m aloft for 384 layers
+#def stretched_vertical_grid(z_bottom, z_top, n_layers, stretch_factor):
+#    # Create a normalized grid in [0, 1]
+#    eta = np.linspace(0, 1, n_layers + 1)  # n_layers + 1 points (including top and bottom)
+#    stretched_eta = (np.exp(stretch_factor * eta) - 1) / (np.exp(stretch_factor) - 1)
+#    zh = z_bottom + (z_top - z_bottom) * stretched_eta
+#    z = 0.5 * (zh[:-1] + zh[1:])
+#    return z, zh
+#
+#z_bottom = 0
+#z_top = zsize
+#n_layers = ktot
+#stretch_factor = 1.6  # This gives ~2.5m near surface, ~20m aloft for 384 layers
+#
+#z, zh = stretched_vertical_grid(z_bottom, z_top, n_layers, stretch_factor)
+#
+## Calculate dz for informational purposes
+#dz = np.diff(zh)
 
-z, zh = stretched_vertical_grid(z_bottom, z_top, n_layers, stretch_factor)
-
-# Calculate dz for informational purposes
-dz = np.diff(zh)
-
-#dz = zsize / ktot
-#z = np.arange(0.5 * dz, zsize, dz)
-
+dz = zsize / ktot
+z = np.arange(0.5 * dz, zsize, dz)
 
 def profile(zi, v_bulk, dv, gamma_v, clip_at_zero=False):
     """
