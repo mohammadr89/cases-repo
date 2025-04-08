@@ -486,8 +486,10 @@ if (sw_land_surface):
     z0h = np.zeros((jtot, itot), dtype=float_type)
     
     # Set roughness lengths for forest
-    z0m[mask_forest_bool] = 0.75    # Momentum roughness length for forest
-    z0h[mask_forest_bool] = 0.75   # Heat roughness length for forest
+    #z0m[mask_forest_bool] = 0.75    # Momentum roughness length for forest
+    #z0h[mask_forest_bool] = 0.75   # Heat roughness length for forest
+    z0m[mask_forest_bool] = 0.03   # Momentum roughness length for grass
+    z0h[mask_forest_bool] = 0.003 # Heat roughness length for grass
     
     # Set roughness lengths for grass (both in and out regions)
     z0m[~mask_forest_bool] = 0.03   # Momentum roughness length for grass

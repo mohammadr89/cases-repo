@@ -521,8 +521,7 @@ if (sw_land_surface):
     
     def set_value(variable, forest, grass):
         ls[variable][mask_forest_bool] = forest      # Forest values
-        ls[variable][~mask_forest_bool] = forest
-        #ls[variable][~mask_forest_bool] = grass      # Grass values (both in and out)
+        ls[variable][~mask_forest_bool] = grass      # Grass values (both in and out)
 
     # Set surface properties for forest and grass regions
     set_value("c_veg", forest=1.0, grass=1.0)      # Vegetation fraction
